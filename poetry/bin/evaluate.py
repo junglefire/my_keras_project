@@ -39,18 +39,20 @@ def generate_random_poetry(tokenizer, model, s=''):
 
 # 在每个epoch训练完成后，保留最优权重，并随机生成settings.SHOW_NUM首古诗展示
 class Evaluate(tf.keras.callbacks.Callback):
-	def __init__(self, tokenizer):
+	def __init__(self, tokenizer, model):
 		super().__init__()
 		# 给loss赋一个较大的初始值
 		self.lowest = 1e10
+		self.tokenizer = tokenizer
+		self.model = model
 
 	def on_epoch_end(self, epoch, logs=None):
 		# 在每个epoch训练完成后调用
 		# 如果当前loss更低，就保存当前模型参数
 		if logs['loss'] <= self.lowest:
 			self.lowest = logs['loss']
-			model.save(setting.BEST_MODEL_PATH)
+			self.model.save(setting.BEST_MODEL_PATH)
 		# 随机生成几首古体诗测试，查看训练效果
 		print()
 		for i in range(setting.SHOW_NUM):
-			print(utils.generate_random_poetry(tokenizer, model))
+			print(utils.generate_random_poetry(self.tokenizer, self.model))
