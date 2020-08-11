@@ -65,7 +65,7 @@ class Application:
 		# 创建数据集
 		dg = PoetryDataGenerator(tk.get_poetry(), setting.BATCH_SIZE, tk, random=True)
 		# 开始训练
-		model.fit_generator(dg.for_fit(), steps_per_epoch=dg.steps, epochs=setting.TRAIN_EPOCHS, callbacks=[Evaluate(model, tk)])
+		model.fit_generator(dg.for_fit(), steps_per_epoch=dg.steps, epochs=setting.TRAIN_EPOCHS, callbacks=[Evaluate(tk, model)])
 		log.info("done!")
 
 	## 关闭
