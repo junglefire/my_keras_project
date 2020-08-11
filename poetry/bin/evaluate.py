@@ -18,7 +18,7 @@ def generate_random_poetry(tokenizer, model, s=''):
 	token_ids = tokenizer.encode(s)
 	# 去掉结束标记[SEP]
 	token_ids = token_ids[:-1]
-	while len(token_ids) < settings.MAX_LEN:
+	while len(token_ids) < setting.MAX_LEN:
 		# 进行预测，只保留第一个样例（我们输入的样例数只有1）的、最后一个token的预测的、不包含[PAD][UNK][CLS]的概率分布
 		_probas = model.predict([token_ids, ])[0, -1, 3:]
 		# print(_probas)
