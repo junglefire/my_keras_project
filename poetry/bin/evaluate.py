@@ -55,4 +55,4 @@ class Evaluate(tf.keras.callbacks.Callback):
 		# 随机生成几首古体诗测试，查看训练效果
 		print()
 		for i in range(setting.SHOW_NUM):
-			print(utils.generate_random_poetry(self.tokenizer, self.model))
+			print(generate_random_poetry(self.tokenizer, self.model))
